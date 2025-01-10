@@ -31,7 +31,7 @@ public class User {
     private String email;
 
     @OneToMany
-    private Set<Role> roleResponseDtos = new HashSet<>();
+    private Set<Role> roles = new HashSet<>();
 
     @Column(name="created_at",updatable = false)
     private LocalDateTime createdDate;

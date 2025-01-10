@@ -3,7 +3,8 @@ package tourTravel.controllers;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-import tourTravel.entities.Favorite;
+import tourTravel.dtos.FavouriteRequestDto;
+import tourTravel.dtos.FavouriteResponseDto;
 import tourTravel.services.FavouriteService;
 
 import java.util.List;
@@ -17,28 +18,28 @@ public class FavouriteController {
     private FavouriteService favouriteService;
 
     @PostMapping
-    public ResponseEntity<Favorite> createFavourite(@RequestBody Favorite favourite) {
-        return ResponseEntity.ok(favouriteService.createFavourite(favourite));
+    public ResponseEntity<FavouriteResponseDto> createFavourite(@RequestBody FavouriteRequestDto favouriteRequestDto) {
+        FavouriteResponseDto favouriteResponseDto = favouriteService.addFavourite(favouriteRequestDto);
+        return ResponseEntity.ok(favouriteResponseDto);
     }
 
     @GetMapping("/{id}")
-    public ResponseEntity<Favorite> getFavouriteById(@PathVariable UUID id) {
-        return ResponseEntity.ok(favouriteService.getFavouriteById(id));
+    public ResponseEntity<FavouriteResponseDto> getFavouriteById(@PathVariable UUID id) {
+        FavouriteResponseDto favouriteResponseDto = favouriteService.getFavouriteById(id);
+        return favouriteResponseDto != null ? ResponseEntity.ok(favouriteResponseDto) : ResponseEntity.notFound().build();
     }
 
     @GetMapping
-    public ResponseEntity<List<Favorite>> getAllFavourites() {
-        return ResponseEntity.ok(favouriteService.getAllFavourites());
+    public ResponseEntity<List<FavouriteResponseDto>> getAllFavourites() {
+        List<FavouriteResponseDto> favouriteResponseDtos = favouriteService.getAllFavourites();
+        return ResponseEntity.ok(favouriteResponseDtos);
     }
 
-    @PutMapping("/{id}")
-    public ResponseEntity<Favorite> updateFavourite(@PathVariable UUID id, @RequestBody Favorite favourite) {
-        return ResponseEntity.ok(favouriteService.updateFavourite(id, favourite));
-    }
 
     @DeleteMapping("/{id}")
     public ResponseEntity<Void> deleteFavourite(@PathVariable UUID id) {
-        favouriteService.deleteFavourite(id);
+        favouriteService.removeFavourite(id);
         return ResponseEntity.noContent().build();
     }
 }
+

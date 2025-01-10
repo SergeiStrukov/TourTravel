@@ -1,3 +1,5 @@
+package tourTravel.services.impl;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import tourTravel.dtos.BookingRequestDto;
@@ -44,7 +46,7 @@ public class BookingServiceImpl implements BookingService {
     public BookingResponseDto updateBooking(UUID id, BookingRequestDto bookingRequestDto) {
         Booking existingBooking = bookingRepository.findById(id).orElse(null);
         if (existingBooking != null) {
-            bookingMapper.updateEntity(bookingRequestDto, existingBooking);
+            bookingMapper.toEntity(bookingRequestDto, existingBooking);
             Booking updatedBooking = bookingRepository.save(existingBooking);
             return bookingMapper.toResponseDto(updatedBooking);
         }

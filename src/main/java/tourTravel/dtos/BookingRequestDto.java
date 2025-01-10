@@ -10,7 +10,6 @@ import java.util.UUID;
 @Getter
 @Setter
 public class BookingRequestDto {
-    private UUID id;
     private UUID userId;
     private UUID tourId;
     private Timestamp bookingDate;

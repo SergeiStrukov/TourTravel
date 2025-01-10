@@ -2,7 +2,6 @@ package tourTravel.services.impl;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import tourTravel.dtos.RoleRequestDto;
 import tourTravel.dtos.RoleResponseDto;
 import tourTravel.entities.Role;
 import tourTravel.mappers.RoleMapper;

@@ -1,14 +1,14 @@
 package tourTravel.services;
 
-import tourTravel.entities.Favorite;
+import tourTravel.dtos.FavouriteRequestDto;
+import tourTravel.dtos.FavouriteResponseDto;
 
 import java.util.List;
 import java.util.UUID;
 
 public interface FavouriteService {
-    Favorite createFavourite(Favorite favourite);
-    Favorite getFavouriteById(UUID id);
-    List<Favorite> getAllFavourites();
-    Favorite updateFavourite(UUID id, Favorite favourite);
-    void deleteFavourite(UUID id);
+    FavouriteResponseDto addFavourite(FavouriteRequestDto favouriteRequestDto);
+    FavouriteResponseDto getFavouriteById(UUID id);
+    List<FavouriteResponseDto> getAllFavourites();
+    void removeFavourite(UUID id);
 }
